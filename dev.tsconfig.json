@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declarationMap": true,
+    "sourceMap": true,
+    "composite": true,
+    "removeComments": true,
+    "esModuleInterop": true,
+    "mapRoot": "dist"
+  }
+}
