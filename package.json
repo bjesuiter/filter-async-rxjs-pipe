@@ -2,12 +2,7 @@
   "name": "filter-async-rxjs-pipe",
   "version": "0.0.1",
   "description": "Some pipeable functions for rxjs 6+ which accept predicate lambdas with async return value (Promise or Observable)",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "compile-dev": "tsc -p dev.tsconfig.json",
-    "compile-prod": "tsc -p tsconfig.json"
-  },
+  "main": "./dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/bjesuiter/filter-async-rxjs-pipe.git"
@@ -27,8 +22,20 @@
     "url": "https://github.com/bjesuiter/filter-async-rxjs-pipe/issues"
   },
   "homepage": "https://github.com/bjesuiter/filter-async-rxjs-pipe#readme",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile-dev": "del dist/* && tsc -p dev.tsconfig.json",
+    "compile-prod": "del dist/* && tsc -p tsconfig.json"
+  },
   "devDependencies": {
     "@types/node": "^10.9.1",
+    "del-cli": "^1.1.0",
     "typescript": "^3.0.1"
+  },
+  "dependencies": {
+    "rxjs": "^6.0.0"
   }
 }
