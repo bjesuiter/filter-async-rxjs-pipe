@@ -24,5 +24,9 @@
   "bugs": {
     "url": "https://github.com/bjesuiter/filter-async-rxjs-pipe/issues"
   },
-  "homepage": "https://github.com/bjesuiter/filter-async-rxjs-pipe#readme"
+  "homepage": "https://github.com/bjesuiter/filter-async-rxjs-pipe#readme",
+  "devDependencies": {
+    "@types/node": "^10.9.1",
+    "typescript": "^3.0.1"
+  }
 }
