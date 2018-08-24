@@ -1,0 +1,28 @@
+{
+  "name": "filter-async-rxjs-pipe",
+  "version": "0.0.1",
+  "description": "Some pipe functions for rxjs 6+ which accept predicate lambdas with async return value (Promise or Observable)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bjesuiter/filter-async-rxjs-pipe.git"
+  },
+  "keywords": [
+    "rxjs",
+    "rxjs6",
+    "rxjs-pipe",
+    "rxjs-filter",
+    "rxjs-async-filter",
+    "observable",
+    "filter"
+  ],
+  "author": "Benjamin Jesuiter <bjesuiter@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/bjesuiter/filter-async-rxjs-pipe/issues"
+  },
+  "homepage": "https://github.com/bjesuiter/filter-async-rxjs-pipe#readme"
+}
