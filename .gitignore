@@ -1,6 +1,8 @@
 
 dist
 
+coverage
+
 # Created by https://www.gitignore.io/api/node,macos,windows,intellij+all,visualstudiocode
 
 ### Intellij+all ###
