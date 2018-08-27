@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 A new release should be issued when a branch is merged to master. 
 
+## [0.1.1] - 2018-08-27
+
+* Prerelease fixes for npm package publishing
+
 ## [0.1.0] - 2018-08-27
 
 ### Added
