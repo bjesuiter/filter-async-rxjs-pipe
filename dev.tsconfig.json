@@ -4,7 +4,7 @@
     "target": "es6",
     "declarationMap": true,
     "sourceMap": true,
-    "composite": true,
+    "composite": false,
     "removeComments": true,
     "esModuleInterop": true,
     "mapRoot": "dist"
