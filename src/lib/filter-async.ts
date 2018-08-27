@@ -10,6 +10,7 @@
  */
 import { pipe, from, MonoTypeOperatorFunction, Observable, OperatorFunction } from 'rxjs';
 import { map, filter, concatMap, flatMap } from 'rxjs/operators';
+import { Thenable } from 'es6-promise';
 
 interface FilterContainer<T> {
     filterResult: boolean,
@@ -23,9 +24,9 @@ type Predicate$<T> = (value: T, index: number) => Observable<boolean>;
  * This rxjs 6+ pipe uses concatMap to apply the async predicate function to each data entry.
  * * DOES preserve order of events
  * * Runs sequential when data comes in faster than the filter function can process it. (Because of ConcatMap)
- * @param predicate A predicate function to test each event which returns Promise<boolean>
+ * @param predicate A predicate function to test each event which returns Thenable<boolean>
  */
-export function filterAsyncSequential<T>(predicate: (value: T, index: number) => Promise<boolean>): MonoTypeOperatorFunction<T> {
+export function filterAsyncSequential<T>(predicate: (value: T, index?: number) => Thenable<boolean>): MonoTypeOperatorFunction<T> {
     return pipe(
         filterAsync((data: T, index: number) => from(predicate(data, index)), true)
     );
@@ -35,9 +36,9 @@ export function filterAsyncSequential<T>(predicate: (value: T, index: number) =>
  * This rxjs 6+ pipe uses flatMap to apply the async predicate function to each data entry.
  * * DOES NOT preserve order of events
  * * Runs in parallel when data comes in faster than the filter function can process it. (Because of FlatMap)
- * @param predicate A predicate function to test each event which returns Promise<boolean>
+ * @param predicate A predicate function to test each event which returns Thenable<boolean>
  */
-export function filterAsyncParallel<T>(predicate: (value: T, index: number) => Promise<boolean>): MonoTypeOperatorFunction<T> {
+export function filterAsyncParallel<T>(predicate: (value: T, index?: number) => Thenable<boolean>): MonoTypeOperatorFunction<T> {
     return pipe(
         filterAsync((data: T, index: number) => from(predicate(data, index)), false)
     );
