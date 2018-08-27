@@ -40,6 +40,7 @@ export function filterByPromise<T>(predicate: Predicate<T>,
 }
 
 /**
+ * This rxjs 6+ pipe accepts a predicate function which returns an Observable<boolean>.
  *
  * @param predicate - The predicate function Observable<boolean> as return type
  * @param parallel - A boolean whether the filter should run sequential and ordered for each observable event
