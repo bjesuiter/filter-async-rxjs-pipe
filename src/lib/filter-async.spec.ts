@@ -10,7 +10,7 @@ describe('Filter Async Sequential', () => {
         range(1, 10)
             .pipe(
                 filterAsyncSequential((value) => Promise.resolve(value % 2 === 0)),
-                reduce((acc: number, value: number) => ++acc, 0)
+                reduce((acc: number) => ++acc, 0)
             )
             .subscribe(filterCount => expect(filterCount).toBe(5), done());
     });
@@ -50,4 +50,26 @@ describe('Filter Async Sequential', () => {
                 done();
             });
     });
+});
+
+
+describe('Filter Async Parallel', () => {
+
+    it('Filter returns correct elements', (done) => {
+        const comparableResult = [2, 4, 6, 8, 10];
+
+        range(1, 10)
+            .pipe(
+                filterAsyncParallel((value) => Promise.resolve(value % 2 === 0)),
+                bufferCount(5)
+            )
+            .subscribe((filterResult: number[]) => {
+                expect(filterResult).toEqual(
+                    // arrayContaining must be used here, since the order of elements is not preserved with filterAsyncParallel
+                    expect.arrayContaining(comparableResult)
+                );
+                done();
+            });
+    });
+
 });
