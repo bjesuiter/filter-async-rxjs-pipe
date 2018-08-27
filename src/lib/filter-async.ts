@@ -8,10 +8,9 @@
  * @param predicate
  * @param thisArg
  */
-import { pipe, from, MonoTypeOperatorFunction, Observable, OperatorFunction } from 'rxjs';
-import { map, filter, concatMap, flatMap, subscribeOn, tap, mergeMapTo, mergeMap } from 'rxjs/operators';
+import { pipe, from, MonoTypeOperatorFunction, Observable, OperatorFunction, asyncScheduler } from 'rxjs';
+import { map, filter, concatMap, subscribeOn, mergeMap } from 'rxjs/operators';
 import { Thenable } from 'es6-promise';
-import { async } from '../../node_modules/rxjs/internal/scheduler/async';
 
 interface FilterContainer<T> {
     filterResult: boolean,
@@ -91,7 +90,7 @@ function filterAsyncParallel<T>(predicate: Predicate$<T>, maxConcurrent: number 
                 return predicate(data, index)
                     .pipe(
                         map((isValid) => ({filterResult: isValid, entry: data})),
-                        subscribeOn(async)
+                        subscribeOn(asyncScheduler)
                     );
             }
         ),
