@@ -23,31 +23,6 @@ type Predicate$<T> = (value: T, index: number) => Observable<boolean>;
 type Predicate<T> = (value: T, index: number) => Thenable<boolean>;
 
 /**
- * This rxjs 6+ pipe uses concatMap to apply the async predicate function to each data entry.
- * * DOES preserve order of events
- * * Runs sequential when data comes in faster than the filter function can process it. (Because of ConcatMap)
- * @param predicate A predicate function to test each event which returns Thenable<boolean>
- */
-export function filterAsyncSequential<T>(predicate: Predicate<T>): MonoTypeOperatorFunction<T> {
-    return pipe(
-        filterAsync((data: T, index: number) => from(predicate(data, index)), true)
-    );
-}
-
-/**
- * This rxjs 6+ pipe uses flatMap to apply the async predicate function to each data entry.
- * * DOES NOT preserve order of events
- * * Runs in parallel when data comes in faster than the filter function can process it. (Because of FlatMap)
- * @param predicate A predicate function to test each event which returns Thenable<boolean>
- * @param concurrent A number indicating the count executed flatMaps in parallel
- */
-export function filterAsyncParallel<T>(predicate: Predicate<T>, concurrent: number = 1): MonoTypeOperatorFunction<T> {
-    return pipe(
-        filterAsync((data: T, index: number) => from(predicate(data, index)), false)
-    );
-}
-
-/**
  * This rxjs 6+ pipe accepts a predicate function which returns a thenable.
  * (e.g. any object with a 'then' method === Promise and custom promise implementations)
  * @param predicate - The predicate function returning Thenable<boolean>
@@ -57,7 +32,7 @@ export function filterAsyncParallel<T>(predicate: Predicate<T>, concurrent: numb
  */
 export function filterByPromise<T>(predicate: Predicate<T>,
                                    parallel: boolean = false,
-                                   concurrent: number = 1) : MonoTypeOperatorFunction<T>{
+                                   concurrent: number = 1): MonoTypeOperatorFunction<T> {
     return pipe(
         filterAsync((data: T, index: number) => from(predicate(data, index)), parallel, concurrent)
     );
@@ -72,45 +47,58 @@ export function filterByPromise<T>(predicate: Predicate<T>,
  *                      Warning: Only active when preserveOrder is false!
  */
 export function filterAsync<T>(predicate: Predicate$<T>, parallel: boolean, concurrent: number = 1): MonoTypeOperatorFunction<T> {
+    return (parallel) ? filterAsyncSequential(predicate) : filterAsyncParallel(predicate, concurrent);
+}
+
+
+/**
+ * This rxjs 6+ pipe uses concatMap to apply the async predicate function to each data entry.
+ * * DOES preserve order of events
+ * * Runs sequential when data comes in faster than the filter function can process it. (Because of ConcatMap)
+ * @param predicate A predicate function to test each event which returns Thenable<boolean>
+ */
+function filterAsyncSequential<T>(predicate: Predicate$<T>): MonoTypeOperatorFunction<T> {
     return pipe(
-        runPredicate(
-            (data: T, index: number) => {
+        concatMap((data: T, index: number) => {
+                // run the predicate &
+                // put the predicate result + the data entry together into container
+                return predicate(data, index)
+                    .pipe(map((isValid) => ({filterResult: isValid, entry: data})));
+            }
+        ),
+        filterDataAndRemoveContainer()
+    );
+}
+
+/**
+ * This rxjs 6+ pipe uses flatMap to apply the async predicate function to each data entry.
+ * * DOES NOT preserve order of events
+ * * Runs in parallel when data comes in faster than the filter function can process it. (Because of FlatMap)
+ * @param predicate A predicate function to test each event which returns Thenable<boolean>
+ * @param concurrent A number indicating the count executed flatMaps in parallel
+ */
+function filterAsyncParallel<T>(predicate: Predicate$<T>, concurrent: number = 1): MonoTypeOperatorFunction<T> {
+    return pipe(
+        flatMap((data: T, index: number) => {
+                // run the predicate &
+                // put the predicate result + the data entry together into container
                 return predicate(data, index)
                     .pipe(
                         map((isValid) => ({filterResult: isValid, entry: data})),
                         subscribeOn(async)
                     );
             }
-            , parallel,
-            concurrent
         ),
+        filterDataAndRemoveContainer()
+    );
+}
+
+function filterDataAndRemoveContainer<T>(): OperatorFunction<FilterContainer<T>, T> {
+    return pipe(
         // Filter the container object synchronously according to the filterResult property
         filter(data => data.filterResult === true),
         // remove the data container object from the observable chain
         map(data => data.entry)
-    );
+    )
 }
 
-/**
- * This function runs the predicate code  with concatMap or flatMap, based on
- * @param predicateRunner - a lambda function which can be executed by concatMap or flatMap
- *                         which executes the async filter predicate function
- * @param preserveOrder - This flag decides whether to use
- *                        concatMap and run the filter function for each data event sequentially (preserveOrder = true)
- *                        or to use
- *                        flatMap and run the predicate function for each data event in parallel (preserveOrder = false)
- * @param concurrent - The number of entries processed in parallel.
- *                      Warning: Only active when preserveOrder is false!
- */
-function runPredicate<T>(predicateRunner: PredicateRunner<T>,
-                         preserveOrder: boolean,
-                         concurrent: number): OperatorFunction<T, FilterContainer<T>> {
-
-    if (preserveOrder === true) {
-        return pipe(concatMap(predicateRunner));
-    } else {
-        return pipe(flatMap(predicateRunner, concurrent));
-    }
-
-    // return pipe((preserveOrder === true) ? concatMap(predicateRunner) : flatMap(predicateRunner, concurrent));
-}
