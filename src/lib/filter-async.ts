@@ -27,13 +27,14 @@ type Predicate<T> = (value: T, index: number) => Thenable<boolean>;
  * @param predicate - The predicate function returning Thenable<boolean>
  * @param parallel - A boolean flag indicating whether the predicate function should be executed
  *                   sequentially or in parallel for multiple observable events
- * @param concurrent - The number of concurrent events being processed
+ * @param maxConcurrent A number indicating the max number of elements processed parallel
+ *                      Warning: Only active when parallel is true!
  */
 export function filterByPromise<T>(predicate: Predicate<T>,
                                    parallel: boolean = false,
-                                   concurrent: number = 1): MonoTypeOperatorFunction<T> {
+                                   maxConcurrent: number = Number.POSITIVE_INFINITY): MonoTypeOperatorFunction<T> {
     return pipe(
-        filterAsync((data: T, index: number) => from(predicate(data, index)), parallel, concurrent)
+        filterAsync((data: T, index: number) => from(predicate(data, index)), parallel, maxConcurrent)
     );
 }
 
@@ -42,11 +43,13 @@ export function filterByPromise<T>(predicate: Predicate<T>,
  * @param predicate - The predicate function Observable<boolean> as return type
  * @param parallel - A boolean whether the filter should run sequential and ordered for each observable event
  *                   or parallel and unordered
- * @param concurrent - A number indicating the number of entries processed in parallel.
- *                      Warning: Only active when preserveOrder is false!
+ * @param maxConcurrent A number indicating the max number of elements processed parallel
+ *                      Warning: Only active when parallel is true!
  */
-export function filterAsync<T>(predicate: Predicate$<T>, parallel: boolean, concurrent: number = 1): MonoTypeOperatorFunction<T> {
-    return (parallel) ? filterAsyncSequential(predicate) : filterAsyncParallel(predicate, concurrent);
+export function filterAsync<T>(predicate: Predicate$<T>,
+                               parallel: boolean,
+                               maxConcurrent: number = Number.POSITIVE_INFINITY): MonoTypeOperatorFunction<T> {
+    return (parallel) ? filterAsyncSequential(predicate) : filterAsyncParallel(predicate, maxConcurrent);
 }
 
 
@@ -74,9 +77,10 @@ function filterAsyncSequential<T>(predicate: Predicate$<T>): MonoTypeOperatorFun
  * * DOES NOT preserve order of events
  * * Runs in parallel when data comes in faster than the filter function can process it. (Because of FlatMap)
  * @param predicate A predicate function to test each event which returns Thenable<boolean>
- * @param concurrent A number indicating the count executed flatMaps in parallel
+ * @param maxConcurrent A number indicating the max number of elements processed parallel
+ *                      Warning: Only active when parallel is true!
  */
-function filterAsyncParallel<T>(predicate: Predicate$<T>, concurrent: number = 1): MonoTypeOperatorFunction<T> {
+function filterAsyncParallel<T>(predicate: Predicate$<T>, maxConcurrent: number = Number.POSITIVE_INFINITY): MonoTypeOperatorFunction<T> {
     return pipe(
         flatMap((data: T, index: number) => {
                 // run the predicate &
