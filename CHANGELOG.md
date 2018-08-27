@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 A new release should be issued when a branch is merged to master. 
 
+## [0.1.3] - 2018-08-27
+
+* improve publish workflow
+
 ## [0.1.2] - 2018-08-27
 
 * improve readme
