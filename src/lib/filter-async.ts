@@ -81,5 +81,12 @@ export function filterAsync<T>(predicate: Predicate$<T>, preserveOrder: boolean,
 function runPredicate<T>(predicateRunner: PredicateRunner<T>,
                          preserveOrder: boolean,
                          concurrent: number): OperatorFunction<T, FilterContainer<T>> {
-    return pipe((preserveOrder === true) ? concatMap(predicateRunner) : flatMap(predicateRunner, concurrent));
+
+    if (preserveOrder === true) {
+        return pipe(concatMap(predicateRunner));
+    } else {
+        return pipe(flatMap(predicateRunner, concurrent));
+    }
+
+    // return pipe((preserveOrder === true) ? concatMap(predicateRunner) : flatMap(predicateRunner, concurrent));
 }
