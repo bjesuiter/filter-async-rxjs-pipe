@@ -9,7 +9,7 @@
  * @param thisArg
  */
 import { pipe, from, MonoTypeOperatorFunction, Observable, OperatorFunction } from 'rxjs';
-import { map, filter, concatMap, flatMap, subscribeOn } from 'rxjs/operators';
+import { map, filter, concatMap, flatMap, subscribeOn, tap, mergeMapTo, mergeMap } from 'rxjs/operators';
 import { Thenable } from 'es6-promise';
 import { async } from '../../node_modules/rxjs/internal/scheduler/async';
 
@@ -27,6 +27,7 @@ type Predicate<T> = (value: T, index: number) => Thenable<boolean>;
  * @param predicate - The predicate function returning Thenable<boolean>
  * @param parallel - A boolean flag indicating whether the predicate function should be executed
  *                   sequentially or in parallel for multiple observable events
+ *                   Warning: Flag has no effect currently
  * @param maxConcurrent A number indicating the max number of elements processed parallel
  *                      Warning: Only active when parallel is true!
  */
@@ -43,6 +44,7 @@ export function filterByPromise<T>(predicate: Predicate<T>,
  * @param predicate - The predicate function Observable<boolean> as return type
  * @param parallel - A boolean whether the filter should run sequential and ordered for each observable event
  *                   or parallel and unordered
+ *                   Warning: Flag has no effect currently
  * @param maxConcurrent A number indicating the max number of elements processed parallel
  *                      Warning: Only active when parallel is true!
  */
@@ -73,7 +75,7 @@ function filterAsyncSequential<T>(predicate: Predicate$<T>): MonoTypeOperatorFun
 }
 
 /**
- * This rxjs 6+ pipe uses flatMap to apply the async predicate function to each data entry.
+ * This rxjs 6+ pipe uses mergeMap (e.g. old flatMap) to apply the async predicate function to each data entry.
  * * DOES NOT preserve order of events
  * * Runs in parallel when data comes in faster than the filter function can process it. (Because of FlatMap)
  * @param predicate A predicate function to test each event which returns Thenable<boolean>
@@ -82,7 +84,7 @@ function filterAsyncSequential<T>(predicate: Predicate$<T>): MonoTypeOperatorFun
  */
 function filterAsyncParallel<T>(predicate: Predicate$<T>, maxConcurrent: number = Number.POSITIVE_INFINITY): MonoTypeOperatorFunction<T> {
     return pipe(
-        flatMap((data: T, index: number) => {
+        mergeMap((data: T, index: number) => {
                 // run the predicate &
                 // put the predicate result + the data entry together into container
                 return predicate(data, index)
@@ -102,6 +104,6 @@ function filterDataAndRemoveContainer<T>(): OperatorFunction<FilterContainer<T>,
         filter(data => data.filterResult === true),
         // remove the data container object from the observable chain
         map(data => data.entry)
-    )
+    );
 }
 
