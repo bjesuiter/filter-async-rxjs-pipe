@@ -47,6 +47,14 @@ export function filterAsyncParallel<T>(predicate: Predicate<T>, concurrent: numb
     );
 }
 
+/**
+ * This rxjs 6+ pipe accepts a predicate function which returns a thenable.
+ * (e.g. any object with a 'then' method === Promise and custom promise implementations)
+ * @param predicate - The predicate function returning Thenable<boolean>
+ * @param parallel - A boolean flag indicating whether the predicate function should be executed
+ *                   sequentially or in parallel for multiple observable events
+ * @param concurrent - The number of concurrent events being processed
+ */
 export function filterByPromise<T>(predicate: Predicate<T>,
                                    parallel: boolean = false,
                                    concurrent: number = 1) : MonoTypeOperatorFunction<T>{
