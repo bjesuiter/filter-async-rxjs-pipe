@@ -1,3 +1,3 @@
 console.log('Test');
 
-export {filterAsync, filterAsyncParallel, filterAsyncSequential} from './lib/filter-async';
+export {filterAsync, filterByPromise} from './lib/filter-async';
