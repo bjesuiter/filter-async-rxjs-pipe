@@ -37,19 +37,28 @@ export function filterAsyncSequential<T>(predicate: (value: T, index?: number) =
  * * DOES NOT preserve order of events
  * * Runs in parallel when data comes in faster than the filter function can process it. (Because of FlatMap)
  * @param predicate A predicate function to test each event which returns Thenable<boolean>
+ * @param concurrent A number indicating the count executed flatMaps in parallel
  */
-export function filterAsyncParallel<T>(predicate: (value: T, index?: number) => Thenable<boolean>): MonoTypeOperatorFunction<T> {
+export function filterAsyncParallel<T>(predicate: (value: T, index?: number) => Thenable<boolean>, concurrent: number = 1): MonoTypeOperatorFunction<T> {
     return pipe(
         filterAsync((data: T, index: number) => from(predicate(data, index)), false)
     );
 }
 
-export function filterAsync<T>(predicate: Predicate$<T>, preserveOrder: boolean): MonoTypeOperatorFunction<T> {
+/**
+ *
+ * @param predicate - The predicate function Observable<boolean> as return type
+ * @param preserveOrder - A boolean whether the filter should run sequentially and ordered or parallel and unordered
+ * @param concurrent - A number indicating the number of entries processed in parallel.
+ *                      Warning: Only active when preserveOrder is false!
+ */
+export function filterAsync<T>(predicate: Predicate$<T>, preserveOrder: boolean, concurrent: number = 1): MonoTypeOperatorFunction<T> {
     return pipe(
         runPredicate(
             (data: T, index: number) => predicate(data, index)
                 .pipe(map((isValid) => ({filterResult: isValid, entry: data})))
-            , preserveOrder
+            , preserveOrder,
+            concurrent
         ),
         // Filter the container object synchronously according to the filterResult property
         filter(data => data.filterResult === true),
@@ -66,7 +75,11 @@ export function filterAsync<T>(predicate: Predicate$<T>, preserveOrder: boolean)
  *                        concatMap and run the filter function for each data event sequentially (preserveOrder = true)
  *                        or to use
  *                        flatMap and run the predicate function for each data event in parallel (preserveOrder = false)
+ * @param concurrent - The number of entries processed in parallel.
+ *                      Warning: Only active when preserveOrder is false!
  */
-function runPredicate<T>(predicateRunner: PredicateRunner<T>, preserveOrder: boolean): OperatorFunction<T, FilterContainer<T>> {
-    return pipe((preserveOrder === true) ? concatMap(predicateRunner) : flatMap(predicateRunner));
+function runPredicate<T>(predicateRunner: PredicateRunner<T>,
+                         preserveOrder: boolean,
+                         concurrent: number): OperatorFunction<T, FilterContainer<T>> {
+    return pipe((preserveOrder === true) ? concatMap(predicateRunner) : flatMap(predicateRunner, concurrent));
 }
