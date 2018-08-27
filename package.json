@@ -33,10 +33,12 @@
   "devDependencies": {
     "@types/jest": "^23.3.1",
     "@types/node": "^10.9.1",
+    "@types/underscore": "^1.8.9",
     "del-cli": "^1.1.0",
     "jest": "^23.5.0",
     "ts-jest": "^23.1.4",
-    "typescript": "^3.0.1"
+    "typescript": "^3.0.1",
+    "underscore": "^1.9.1"
   },
   "dependencies": {
     "es6-promise": "^4.2.4",
