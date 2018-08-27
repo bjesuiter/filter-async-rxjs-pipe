@@ -18,7 +18,6 @@ interface FilterContainer<T> {
     entry: T
 }
 
-type PredicateRunner<T> = (data: T, index: number) => Observable<FilterContainer<T>>;
 type Predicate$<T> = (value: T, index: number) => Observable<boolean>;
 type Predicate<T> = (value: T, index: number) => Thenable<boolean>;
 
