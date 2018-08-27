@@ -28,7 +28,8 @@
   "scripts": {
     "test": "jest",
     "build-dev": "del dist/* && tsc -p dev.tsconfig.json",
-    "build": "del dist/* && tsc -p tsconfig.json"
+    "build": "del dist/* && tsc -p tsconfig.json",
+    "beforepublish": "npm run build"
   },
   "devDependencies": {
     "@types/jest": "^23.3.1",
