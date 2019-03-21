@@ -29,7 +29,8 @@
     "test": "jest",
     "build-dev": "del dist/* && tsc -p dev.tsconfig.json",
     "build": "del dist/* && tsc -p tsconfig.json",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "deploy": "npm publish"
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
