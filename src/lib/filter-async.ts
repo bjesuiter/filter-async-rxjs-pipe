@@ -76,7 +76,7 @@ function filterAsyncSequential<T>(predicate: Predicate$<T>): MonoTypeOperatorFun
 
 /**
  * This rxjs 6+ pipe uses mergeMap (e.g. old flatMap) to apply the async predicate function to each data entry.
- * * DOES NOT preserve order of events
+ * * DOES NOT preserve order of events, BUT MAY preserve order of events!
  * * Runs in parallel when data comes in faster than the filter function can process it. (Because of FlatMap)
  * @param predicate A predicate function to test each event which returns Thenable<boolean>
  * @param maxConcurrent A number indicating the max number of elements processed parallel
