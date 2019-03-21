@@ -8,7 +8,7 @@ A new release should be issued when a branch is merged to master.
 
 ## [0.1.5] - 2019-03-21
 
-* update all dependencies to fix npm audit complaints for dev dependencies
+* update all dependencies for security improvements
 
 ## [0.1.4] - 2018-08-27
 
