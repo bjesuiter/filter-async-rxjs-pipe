@@ -1,6 +1,6 @@
 {
   "name": "filter-async-rxjs-pipe",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Some pipeable functions for rxjs 6+ which accept predicate lambdas with async return value (Promise or Observable)",
   "main": "./dist/src/index.js",
   "repository": {
