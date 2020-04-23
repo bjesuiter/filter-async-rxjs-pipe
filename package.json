@@ -45,6 +45,6 @@
   },
   "dependencies": {
     "es6-promise": "^4.2.6",
-    "rxjs": "^6.4.0"
+    "rxjs": "^6.5.4"
   }
 }
