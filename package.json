@@ -1,50 +1,90 @@
 {
-  "name": "filter-async-rxjs-pipe",
-  "version": "0.1.5",
-  "description": "Some pipeable functions for rxjs 6+ which accept predicate lambdas with async return value (Promise or Observable)",
-  "main": "./dist/src/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/bjesuiter/filter-async-rxjs-pipe.git"
-  },
-  "keywords": [
-    "rxjs",
-    "rxjs6",
-    "rxjs-pipe",
-    "rxjs-filter",
-    "rxjs-async-filter",
-    "observable",
-    "filter"
-  ],
-  "author": "Benjamin Jesuiter <bjesuiter@gmail.com>",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/bjesuiter/filter-async-rxjs-pipe/issues"
-  },
-  "homepage": "https://github.com/bjesuiter/filter-async-rxjs-pipe#readme",
-  "files": [
-    "dist/**/*"
-  ],
-  "scripts": {
-    "test": "jest",
-    "build-dev": "del dist/* && tsc -p dev.tsconfig.json",
-    "build": "del dist/* && tsc -p tsconfig.json",
-    "prepare": "npm run build",
-    "deploy": "npm publish"
-  },
-  "devDependencies": {
-    "@types/jest": "^25.2.3",
-    "@types/node": "^14.0.1",
-    "@types/underscore": "^1.10.0",
-    "del-cli": "^3.0.1",
-    "jest": "^26.0.1",
-    "moment": "^2.25.3",
-    "ts-jest": "^26.0.0",
-    "typescript": "^3.9.2",
-    "underscore": "^1.10.2"
-  },
-  "dependencies": {
-    "es6-promise": "^4.2.8",
-    "rxjs": "^6.5.5"
-  }
+	"name": "filter-async-rxjs-pipe",
+	"version": "0.1.5",
+	"description": "Some pipeable functions for rxjs 6+ which accept predicate lambdas with async return value (Promise or Observable)",
+	"main": "./dist/src/index.js",
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/bjesuiter/filter-async-rxjs-pipe.git"
+	},
+	"keywords": [
+		"rxjs",
+		"rxjs6",
+		"rxjs-pipe",
+		"rxjs-filter",
+		"rxjs-async-filter",
+		"observable",
+		"filter"
+	],
+	"author": "Benjamin Jesuiter <bjesuiter@gmail.com>",
+	"license": "Apache-2.0",
+	"bugs": {
+		"url": "https://github.com/bjesuiter/filter-async-rxjs-pipe/issues"
+	},
+	"homepage": "https://github.com/bjesuiter/filter-async-rxjs-pipe#readme",
+	"files": [
+		"dist/**/*"
+	],
+	"scripts": {
+		"test": "ava",
+		"test:watch": "ava --watch",
+		"build-dev": "del dist/* && tsc -p dev.tsconfig.json",
+		"build": "del dist/* && tsc -p tsconfig.json",
+		"prepare": "npm run build",
+		"deploy": "npm publish",
+		"xo": "xo",
+		"start": "./src/index.js",
+		"dry-publish": "np --preview"
+	},
+	"devDependencies": {
+		"@types/jest": "^25.2.3",
+		"@types/node": "^14.0.1",
+		"@types/underscore": "^1.10.0",
+		"ava": "^3.8.2",
+		"del-cli": "^3.0.1",
+		"esm": "^3.2.25",
+		"jest": "^26.0.1",
+		"moment": "^2.25.3",
+		"np": "^6.2.3",
+		"ts-jest": "^26.0.0",
+		"ts-node": "^8.10.1",
+		"tsconfig-paths": "^3.9.0",
+		"typescript": "^3.9.2",
+		"underscore": "^1.10.2",
+		"xo": "^0.30.0"
+	},
+	"dependencies": {
+		"es6-promise": "^4.2.8",
+		"rxjs": "^6.5.5"
+	},
+	"xo": {
+		"space": false,
+		"rules": {
+			"quotes": [
+				"error",
+				"single",
+				{
+					"allowTemplateLiterals": true
+				}
+			],
+			"prefer-destructuring": [
+				"error",
+				{
+					"array": false,
+					"object": false
+				},
+				{
+					"enforceForRenamedProperties": false
+				}
+			],
+			"no-trailing-spaces": [
+				"error",
+				{
+					"skipBlankLines": true,
+					"ignoreComments": true
+				}
+			],
+			"@typescript-eslint/prefer-readonly-parameter-types": "off"
+		}
+	}
 }
