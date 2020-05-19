@@ -33,18 +33,18 @@
     "deploy": "npm publish"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.11",
-    "@types/node": "^11.11.4",
-    "@types/underscore": "^1.8.13",
-    "del-cli": "^1.1.0",
-    "jest": "^24.5.0",
-    "moment": "^2.24.0",
-    "ts-jest": "^24.0.0",
-    "typescript": "^3.3.4000",
-    "underscore": "^1.9.1"
+    "@types/jest": "^25.2.3",
+    "@types/node": "^14.0.1",
+    "@types/underscore": "^1.10.0",
+    "del-cli": "^3.0.1",
+    "jest": "^26.0.1",
+    "moment": "^2.25.3",
+    "ts-jest": "^26.0.0",
+    "typescript": "^3.9.2",
+    "underscore": "^1.10.2"
   },
   "dependencies": {
-    "es6-promise": "^4.2.6",
-    "rxjs": "^6.4.0"
+    "es6-promise": "^4.2.8",
+    "rxjs": "^6.5.5"
   }
 }
