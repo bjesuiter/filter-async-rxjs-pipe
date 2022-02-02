@@ -33,8 +33,10 @@
     "deploy": "npm publish"
   },
   "dependencies": {
-    "es6-promise": "^4.2.8",
-    "rxjs": "^6.4.0"
+  },
+  "peerDependencies": {
+    "es6-promise": ">= 4.2.6 < 5",
+    "rxjs": ">= 6.0.0 < 8"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",

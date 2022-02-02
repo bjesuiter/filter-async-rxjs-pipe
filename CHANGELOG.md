@@ -10,7 +10,8 @@ A new release should be issued when a branch is merged to master.
 
 ### Prod Dependency upgrades
 * run basic `npm audit fix` to fix all currently existing vulnerabilities without bumping the versions
-* update es6-promise from ^4.2.6 to ^4.2.8
+* update es6-promise from ^4.2.6 to ^4.2.8, but moved it to peerDependencies as ">= 4.2.6 < 5"
+* update rxjs from ^6.4.0 to ^7.5.2, but moved it to peerDependencies as ">= 6.0.0 < 8"
 
 ### Dev Dependency upgrades
 * upgrade package-lock.json to new file format (autmatically done by npm on npm install)
