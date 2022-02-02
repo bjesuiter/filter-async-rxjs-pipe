@@ -14,6 +14,7 @@ A new release should be issued when a branch is merged to master.
 * update es6-promise from ^4.2.6 to ^4.2.8
 * update node typings from ^11.x to ^16.11.22
 * update @types/underscore from ^1.8.13 to ^1.11.4
+* update jest to ^27.4.0, together with types/jest and ts-jest (fixes build errors from babel! :))
 
 
 ## [0.1.5] - 2019-03-21
