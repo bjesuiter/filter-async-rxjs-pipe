@@ -8,11 +8,13 @@ A new release should be issued when a branch is merged to master.
 
 ## Next 
 
-### Dependency upgrades
-* upgrade package-lock.json to new file format (autmatically done by npm on npm install)
+### Prod Dependency upgrades
 * run basic `npm audit fix` to fix all currently existing vulnerabilities without bumping the versions
-* upgrade del-cli from ^1.1.0 to ^4.0.1
 * update es6-promise from ^4.2.6 to ^4.2.8
+
+### Dev Dependency upgrades
+* upgrade package-lock.json to new file format (autmatically done by npm on npm install)
+* upgrade del-cli from ^1.1.0 to ^4.0.1
 * update node typings from ^11.x to ^16.11.22
 * update @types/underscore from ^1.8.13 to ^1.11.4
 * update jest to ^27.4.0, together with types/jest and ts-jest (fixes build errors from babel! :))
