@@ -10,6 +10,7 @@ A new release should be issued when a branch is merged to master.
 
 * upgrade package-lock.json to new file format (autmatically done by npm on npm install)
 * run basic `npm audit fix` to fix all currently existing vulnerabilities without bumping the versions
+* upgrade del-cli from ^1.1.0 to ^4.0.1
 
 
 ## [0.1.5] - 2019-03-21
