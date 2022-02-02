@@ -6,7 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 A new release should be issued when a branch is merged to master.
 
-## Next 
+## [1.0.0] - 2022-02-02 
+
+Note: The test for the 'parallel' flag on this operator is still not working, has to be fixed later. 
 
 ### Prod Dependency upgrades
 * run basic `npm audit fix` to fix all currently existing vulnerabilities without bumping the versions
