@@ -6,6 +6,28 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 A new release should be issued when a branch is merged to master.
 
+## [1.0.0] - 2022-02-02 
+
+Note: The test for the 'parallel' flag on this operator is still not working, has to be fixed later. 
+
+### Prod Dependency upgrades
+* run basic `npm audit fix` to fix all currently existing vulnerabilities without bumping the versions
+* update es6-promise from ^4.2.6 to ^4.2.8, but moved it to peerDependencies as ">= 4.2.6 < 5"
+* update rxjs from ^6.4.0 to ^7.5.2, but moved it to peerDependencies as ">= 6.0.0 < 8"
+
+### Dev Dependency upgrades
+* upgrade package-lock.json to new file format (autmatically done by npm on npm install)
+* upgrade del-cli from ^1.1.0 to ^4.0.1
+* update node typings from ^11.x to ^16.11.22
+* update @types/underscore from ^1.8.13 to ^1.11.4
+* update jest to ^27.4.0, together with types/jest and ts-jest (fixes build errors from babel! :))
+* update underscore from ^1.9.1 to ^1.13.2
+* upgrade typescript from ^3.3.4000 to ^4.5.5
+* update moment from ^2.24.0 to ^2.29.1
+
+### Further maintenance
+* update jest configuration
+
 ## [0.1.5] - 2019-03-21
 
 * update all dependencies for security improvements
