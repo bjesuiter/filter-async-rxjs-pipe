@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 A new release should be issued when a branch is merged to master.
 
+## Next 
+
+* upgrade package-lock.json to new file format (autmatically done by npm on npm install)
+
+
 ## [0.1.5] - 2019-03-21
 
 * update all dependencies for security improvements
