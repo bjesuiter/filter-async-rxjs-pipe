@@ -9,6 +9,7 @@ A new release should be issued when a branch is merged to master.
 ## Next 
 
 * upgrade package-lock.json to new file format (autmatically done by npm on npm install)
+* run basic `npm audit fix` to fix all currently existing vulnerabilities without bumping the versions
 
 
 ## [0.1.5] - 2019-03-21
