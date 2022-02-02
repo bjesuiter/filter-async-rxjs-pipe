@@ -76,7 +76,7 @@ describe('Filter Async Parallel', () => {
 
 
     // FIXME: Redesign Test, because mergeMap MAY process events in order but is not forced to do so!
-    it('Filter runs parallel', (done) => {
+    xit('Filter runs parallel', (done) => {
         const comparableResult = ['d', 'c', 'b', 'a'];
 
         of(...['a', 'b', 'c', 'd'])
