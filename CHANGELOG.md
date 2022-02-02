@@ -8,6 +8,7 @@ A new release should be issued when a branch is merged to master.
 
 ## Next 
 
+### Dependency upgrades
 * upgrade package-lock.json to new file format (autmatically done by npm on npm install)
 * run basic `npm audit fix` to fix all currently existing vulnerabilities without bumping the versions
 * upgrade del-cli from ^1.1.0 to ^4.0.1
@@ -16,6 +17,9 @@ A new release should be issued when a branch is merged to master.
 * update @types/underscore from ^1.8.13 to ^1.11.4
 * update jest to ^27.4.0, together with types/jest and ts-jest (fixes build errors from babel! :))
 * update underscore from ^1.9.1 to ^1.13.2
+
+### Further maintenance
+* update jest configuration
 
 ## [0.1.5] - 2019-03-21
 
