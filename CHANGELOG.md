@@ -18,6 +18,7 @@ A new release should be issued when a branch is merged to master.
 * update jest to ^27.4.0, together with types/jest and ts-jest (fixes build errors from babel! :))
 * update underscore from ^1.9.1 to ^1.13.2
 * upgrade typescript from ^3.3.4000 to ^4.5.5
+* update moment from ^2.24.0 to ^2.29.1
 
 ### Further maintenance
 * update jest configuration
