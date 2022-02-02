@@ -12,6 +12,7 @@ A new release should be issued when a branch is merged to master.
 * run basic `npm audit fix` to fix all currently existing vulnerabilities without bumping the versions
 * upgrade del-cli from ^1.1.0 to ^4.0.1
 * update es6-promise from ^4.2.6 to ^4.2.8
+* update node typings from ^11.x to ^16.11.22
 
 
 ## [0.1.5] - 2019-03-21
