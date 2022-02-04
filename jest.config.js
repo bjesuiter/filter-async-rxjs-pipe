@@ -11,6 +11,10 @@ module.exports = {
   ],
   testEnvironment: 'node',
   testMatch: [
-    'src/**/*.spec.ts',
+    '**/*.spec.+(ts)',
+  ],
+  modulePathIgnorePatterns: [
+    "<rootDir>/dist", 
+    "<rootDir>/.swc",
   ]
 }
