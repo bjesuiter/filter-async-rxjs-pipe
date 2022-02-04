@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 A new release should be issued when a branch is merged to master.
 
+## [1.0.1] - 2022-02-04 
+
+* remove promise-delay.ts from shipped package, since it is only relevant for testing this pipe 
+  (it also had no entry in index.js of this package, so it was only importable via deep import)
+
+## Internal changes
+Switched from ts-jest to @swc/jest for transpiling test suites written in ts for jest. 
+It is muuuuch faster now!
+
 ## [1.0.0] - 2022-02-02 
 
 Note: The test for the 'parallel' flag on this operator is still not working, has to be fixed later. 
