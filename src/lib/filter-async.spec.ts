@@ -3,7 +3,7 @@ import { range, forkJoin, of } from 'rxjs';
 import { Promise } from 'es6-promise';
 import { reduce, bufferCount, map } from 'rxjs/operators';
 import { difference } from 'underscore';
-import { promiseDelay } from './promise-delay';
+import { promiseDelay } from '../test-helpers/promise-delay';
 import * as moment from 'moment';
 
 describe('Filter Async Sequential', () => {
