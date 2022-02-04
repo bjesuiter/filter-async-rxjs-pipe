@@ -2,7 +2,21 @@
   "name": "filter-async-rxjs-pipe",
   "version": "1.0.0",
   "description": "Some pipeable functions for rxjs 6+ which accept predicate lambdas with async return value (Promise or Observable)",
-  "main": "./dist/src/index.js",
+  "main": "./dist/src/index.js", 
+  "files": [
+    "dist/**/*"
+  ],  
+  "peerDependencies": {
+    "es6-promise": ">= 4.2.6 < 5",
+    "rxjs": ">= 6.0.0 < 8"
+  },
+  "scripts": {
+    "test": "jest",
+    "build-dev": "del dist/* && tsc -p dev.tsconfig.json",
+    "build": "del dist/* && tsc -p tsconfig.json",
+    "prepare": "npm run build",
+    "deploy": "npm publish"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/bjesuiter/filter-async-rxjs-pipe.git"
@@ -22,20 +36,7 @@
     "url": "https://github.com/bjesuiter/filter-async-rxjs-pipe/issues"
   },
   "homepage": "https://github.com/bjesuiter/filter-async-rxjs-pipe#readme",
-  "files": [
-    "dist/**/*"
-  ],
-  "scripts": {
-    "test": "jest",
-    "build-dev": "del dist/* && tsc -p dev.tsconfig.json",
-    "build": "del dist/* && tsc -p tsconfig.json",
-    "prepare": "npm run build",
-    "deploy": "npm publish"
-  },
-  "peerDependencies": {
-    "es6-promise": ">= 4.2.6 < 5",
-    "rxjs": ">= 6.0.0 < 8"
-  },
+
   "devDependencies": {
     "@swc/cli": "^0.1.55",
     "@swc/core": "^1.2.136",
