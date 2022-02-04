@@ -1,5 +1,3 @@
-// bje- Adjust, as you see fit.
-// Find the default settings here: 
 {
     "jsc": {
         "parser": {
@@ -15,7 +13,6 @@
         "target": "es5",
         "loose": false,
         "externalHelpers": false,
-        // Requires v1.2.50 or upper and requires target to be es2016 or upper.
         "keepClassNames": false
     }
 }
