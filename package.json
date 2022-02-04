@@ -12,8 +12,9 @@
   },
   "scripts": {
     "test": "jest",
-    "build-dev": "del dist/* && tsc -p dev.tsconfig.json",
+    "typecheck": "tsc --noEmit",
     "build": "del dist/* && tsc -p tsconfig.json",
+    "build-swc": "swc src -d dist --ignore **/*.spec.ts",
     "prepare": "npm run build",
     "deploy": "npm publish"
   },
