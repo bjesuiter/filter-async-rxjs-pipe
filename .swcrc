@@ -1,21 +1,17 @@
-// bje- These are the default settings for swc transpiler. 
-//      Adjust, as you see fit.
+// bje- Adjust, as you see fit.
+// Find the default settings here: 
 {
     "jsc": {
         "parser": {
-            "syntax": "ecmascript",
-            "jsx": false,
-            "dynamicImport": false,
-            "privateMethod": false,
-            "functionBind": false,
-            "exportDefaultFrom": false,
-            "exportNamespaceFrom": false,
+            "syntax": "typescript",
+            "tsx": false,
             "decorators": false,
-            "decoratorsBeforeExport": false,
-            "topLevelAwait": false,
-            "importMeta": false
+            "dynamicImport": false
         },
-        "transform": null,
+        "transform": {
+            "legacyDecorator": true,
+            "decoratorMetadata": true
+        },
         "target": "es5",
         "loose": false,
         "externalHelpers": false,
