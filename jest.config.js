@@ -11,7 +11,6 @@ module.exports = {
   ],
   testEnvironment: 'node',
   testMatch: [
-    '**/*.spec.+(ts|tsx|js)',
-    '**/__tests__/*.+(ts|tsx|js)',
+    'src/**/*.spec.ts',
   ]
 }
