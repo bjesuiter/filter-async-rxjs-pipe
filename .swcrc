@@ -6,7 +6,7 @@
             "decorators": false,
             "dynamicImport": false
         },
-        "target": "es5",
+        "target": "es2015",
         "loose": false,
         "externalHelpers": false,
         "keepClassNames": false
